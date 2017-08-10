@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
+using MvcMovie.Models.Database;
 
 namespace MvcMovie
 {
@@ -31,10 +31,9 @@ namespace MvcMovie
         {
             // Add framework services.
             services.AddMvc();
-
             var connectionString =  Configuration["DbContextSettings:DbConnectionString"];
-            services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(connectionString));
-            services.AddScoped<MvcMovieContext>();
+            services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(connectionString));
+            services.AddScoped<DataBaseContext>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -61,8 +60,8 @@ namespace MvcMovie
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DBinitialize.EnsureCreated(app.ApplicationServices);
-            SeedData.Initialize(app.ApplicationServices);
+            // DBinitialize.EnsureCreated(app.ApplicationServices);
+            // SeedData.Initialize(app.ApplicationServices);
         }
     }
 }
