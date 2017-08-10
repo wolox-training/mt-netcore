@@ -24,7 +24,7 @@ namespace MvcMovie.Controllers
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
-            
+
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movies
                                             orderby m.Genre
