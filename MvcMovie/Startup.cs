@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models.Database;
+using MvcMovie.Models;
 
 namespace MvcMovie
 {
@@ -59,9 +60,7 @@ namespace MvcMovie
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // DBinitialize.EnsureCreated(app.ApplicationServices);
-            // SeedData.Initialize(app.ApplicationServices);
+            SeedData.Initialize(app.ApplicationServices);
         }
     }
 }
