@@ -76,10 +76,10 @@ namespace MvcMovie.Controllers
 
             var movieGenreVM = new MovieGenreViewModel();
             int pageSize = 2;
-            
+
             movieGenreVM.genres = new SelectList(await genreQuery.Distinct().ToListAsync());
             movieGenreVM.movies = await PaginatedList<Movie>.CreateAsync(movies, page ?? 1, pageSize);
-                       
+
             return View(movieGenreVM);
         }
 
