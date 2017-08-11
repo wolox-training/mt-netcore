@@ -16,7 +16,37 @@ namespace MvcMovie.Models
                 // Look for any movies.
                 if (context.Movies.Any())
                 {
-                    return;   // DB has been seeded
+                    if (context.Comments.Any())
+                    {
+                        return;   // DB has been seeded
+                    }
+                    else
+                    {
+                        context.Comments.AddRange(
+                            new Comment
+                            {
+                                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id nibh mollis, finibus urna sed, finibus augue.",
+                                MovieID = 1,
+                            },
+                            new Comment
+                            {
+                                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id nibh mollis, finibus urna sed, finibus augue.",
+                                MovieID = 1,
+                            },
+                            new Comment
+                            {
+                                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id nibh mollis, finibus urna sed, finibus augue.",
+                                MovieID = 3,
+                            },
+                            new Comment
+                            {
+                                Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id nibh mollis, finibus urna sed, finibus augue.",
+                                MovieID = 4,
+                            }
+                        );
+                        context.SaveChanges();
+                        return;
+                    }                    
                 }
 
                 context.Movies.AddRange(
@@ -44,14 +74,15 @@ namespace MvcMovie.Models
                          Price = 9.99M
                      },
 
-                   new Movie
-                   {
-                       Title = "Rio Bravo",
-                       ReleaseDate = DateTime.Parse("1959-4-15"),
-                       Genre = "Western",
-                       Price = 3.99M
-                   }
+                    new Movie
+                    {
+                        Title = "Rio Bravo",
+                        ReleaseDate = DateTime.Parse("1959-4-15"),
+                        Genre = "Western",
+                        Price = 3.99M
+                    }
                 );
+
                 context.SaveChanges();
             }
         }

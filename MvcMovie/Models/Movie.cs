@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace MvcMovie.Models
 {
@@ -21,5 +22,7 @@ namespace MvcMovie.Models
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$"), StringLength(5)]
         public string Rating { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }
