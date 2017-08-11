@@ -17,9 +17,7 @@ namespace MvcMovie
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                
                 .Build();
-
             host.Run();
         }
     }
