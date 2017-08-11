@@ -19,8 +19,14 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string movieGenre, string searchString)
+        
+
+        public async Task<IActionResult> Index(string movieGenre, string searchString, string sortOrder)
         {
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
+            
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movies
                                             orderby m.Genre
@@ -37,6 +43,27 @@ namespace MvcMovie.Controllers
             if (!String.IsNullOrEmpty(movieGenre))
             {
                 movies = movies.Where(x => x.Genre == movieGenre);
+            }
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    movies = movies.OrderByDescending(m => m.Title);
+                    break;
+                case "Date":
+                    movies = movies.OrderBy(m => m.ReleaseDate);
+                    break;
+                case "date_desc":
+                    movies = movies.OrderByDescending(m => m.ReleaseDate);
+                    break;
+                case "Genre":
+                    movies = movies.OrderBy(m => m.Genre);
+                    break;
+                case "genre_desc":
+                    movies = movies.OrderByDescending(m => m.Genre);
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
             }
 
             var movieGenreVM = new MovieGenreViewModel();
