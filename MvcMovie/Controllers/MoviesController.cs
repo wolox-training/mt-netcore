@@ -19,7 +19,7 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string movieGenre, string searchString, string sortOrder)
+        public async Task<IActionResult> Index(string movieGenre, string currentFilter, string searchString, string sortOrder, int? page)
         {
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
@@ -42,6 +42,16 @@ namespace MvcMovie.Controllers
             {
                 movies = movies.Where(x => x.Genre == movieGenre);
             }
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":
@@ -65,9 +75,11 @@ namespace MvcMovie.Controllers
             }
 
             var movieGenreVM = new MovieGenreViewModel();
+            int pageSize = 2;
+            
             movieGenreVM.genres = new SelectList(await genreQuery.Distinct().ToListAsync());
-            movieGenreVM.movies = await movies.ToListAsync();
-
+            movieGenreVM.movies = await PaginatedList<Movie>.CreateAsync(movies, page ?? 1, pageSize);
+                       
             return View(movieGenreVM);
         }
 
