@@ -19,8 +19,6 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
-        
-
         public async Task<IActionResult> Index(string movieGenre, string searchString, string sortOrder)
         {
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
