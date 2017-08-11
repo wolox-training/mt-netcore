@@ -1,0 +1,22 @@
+
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+@{
+    Html.RenderPartial("_Form");
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
