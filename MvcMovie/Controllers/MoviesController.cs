@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models.Database;
 using MvcMovie.Models;
+using MvcMovie.Models.Views;
 
 namespace MvcMovie.Controllers
 {
@@ -91,13 +92,13 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var movie = await _context.Movies.Include(m => m.Comments)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (movie == null)
             {
                 return NotFound();
             }
-
+            
             return View(movie);
         }
 

@@ -1,6 +1,5 @@
 #region Using
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
 
 #endregion
 

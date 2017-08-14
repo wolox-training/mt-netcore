@@ -19,7 +19,6 @@ namespace MvcMovie.Controllers
             ViewData["Message"] = "Your application description page.";
             return View();
         }
-zz
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

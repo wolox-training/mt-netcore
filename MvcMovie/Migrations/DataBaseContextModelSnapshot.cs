@@ -16,12 +16,12 @@ namespace MvcMovie.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "1.1.1");
 
-            modelBuilder.Entity("MvcMovie.Models.Comment", b =>
+            modelBuilder.Entity("MvcMovie.Models.Database.Comment", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MovieID");
+                    b.Property<int?>("MovieID");
 
                     b.Property<string>("Text")
                         .HasMaxLength(140);
@@ -33,7 +33,7 @@ namespace MvcMovie.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.Movie", b =>
+            modelBuilder.Entity("MvcMovie.Models.Database.Movie", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -57,12 +57,11 @@ namespace MvcMovie.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.Comment", b =>
+            modelBuilder.Entity("MvcMovie.Models.Database.Comment", b =>
                 {
-                    b.HasOne("MvcMovie.Models.Movie", "Movie")
+                    b.HasOne("MvcMovie.Models.Database.Movie", "Movie")
                         .WithMany("Comments")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MovieID");
                 });
         }
     }

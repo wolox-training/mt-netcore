@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MvcMovie.Models
+namespace MvcMovie.Models.Database
 {
     public class Comment
     {
@@ -10,7 +10,6 @@ namespace MvcMovie.Models
         [StringLength(140, MinimumLength = 3)]
         public string Text { get; set; }
         
-        public int MovieID { get; set; }
         public Movie Movie { get; set; }
 
     }

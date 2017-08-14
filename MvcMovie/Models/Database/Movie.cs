@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace MvcMovie.Models
+namespace MvcMovie.Models.Database
 {
     public class Movie
     {
